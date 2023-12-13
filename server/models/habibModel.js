@@ -29,9 +29,9 @@ const habib_Doctors_Schema = new mongoose.Schema({
   ],
 });
 
-const habib_Doctors = mongoose.model(
+const habib_Doctors_Model = mongoose.model(
   "habib_Doctors_Schema",
   habib_Doctors_Schema
 );
 
-module.exports = habib_Doctors;
+module.exports = habib_Doctors_Model;

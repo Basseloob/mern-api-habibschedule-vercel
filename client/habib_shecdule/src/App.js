@@ -129,16 +129,16 @@ function App() {
     console.log("Nehphro innerText : ", innerText);
     setChooseClinic(innerText);
 
-    axios
-      .get(
-        // "http://localhost:3001/habibUrl/habibSchedule_Nephrology"
-        // "https://habib-schedule-vercel-hosted.vercel.app/habibUrl/habibSchedule_Nephrology"
-        "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Nephrology"
-      )
-      .then((response) => {
+    axios.get;
+    // "http://localhost:3001/habibUrl/habibSchedule_Nephrology"
+    // "https://habib-schedule-vercel-hosted.vercel.app/habibUrl/habibSchedule_Nephrology"
+    "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Nephrology"().then(
+    // "http://localhost:3001/#/habibSchedule_Nephrology"
+      (response) => {
         // console.log(response.data);
         setAllDoctors(response.data);
-      });
+      }
+    );
   };
 
   return (

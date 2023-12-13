@@ -1,14 +1,17 @@
+const fs = require("fs");
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 // const RegisterModel = require("./models/Register");
-const habibModel = require("./models/habibModel");
-
-const app = express();
+const habib_Doctors_Model = require("./models/habibModel");
 
 app.use(
   cors({
-    origin: ["https://mern-api-habibschedule-vercel-frontend.vercel.app/"],
+    origin: [
+      "https://mern-api-habibschedule-vercel-frontend.vercel.app/",
+      // "http://localhost:3000/",
+    ],
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -21,7 +24,8 @@ app.use(express.json());
 mongoose
   .connect(
     // "mongodb+srv://basseloob:Basilpsp9111@alhabib-cluster.nnbcxyh.mongodb.net/testname2?retryWrites=true&w=majority"
-    "mongodb://basseloob:Basilpsp9111@ac-7hgzxvl-shard-00-00.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-01.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-02.nnbcxyh.mongodb.net:27017/testname2?ssl=true&replicaSet=atlas-x2jk5t-shard-0&authSource=admin&retryWrites=true&w=majority"
+    // "mongodb://basseloob:Basilpsp9111@ac-7hgzxvl-shard-00-00.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-01.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-02.nnbcxyh.mongodb.net:27017/testname2?ssl=true&replicaSet=atlas-x2jk5t-shard-0&authSource=admin&retryWrites=true&w=majority"
+    "mongodb://basseloob:Basilpsp9111@ac-7hgzxvl-shard-00-00.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-01.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-02.nnbcxyh.mongodb.net:27017/Habib_Doctors?replicaSet=atlas-x2jk5t-shard-0&ssl=true&authSource=admin"
   )
   .then(() => {
     console.log("mongoDB connected.");
@@ -44,9 +48,15 @@ app.get("/habibSchedule_Nephrology", async (req, res) => {
     // const filePath = require(`../output/${sanitized_Clinic_Parameter_Link}`);
 
     // 1) Get the Data from mongoDB :
-    const mongoDB_data = await habibModel.find({}); // 4) Response :
+    const mongoDB_data = await habib_Doctors_Model.find({});
+
+    if (mongoDB_data.length === 0) {
+      return res.status(404).json({ error: "No data found!!!" });
+    }
+
     console.log("MongoDB Data:", mongoDB_data);
 
+    // 4) Response :
     // res.json(filePath);
     res.json({ data: mongoDB_data });
   } catch (error) {

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 // dotenv.config({ path: ".././config.env" });
 
 const fs = require("fs");
-const habib_Doctors = require("../models/habib_Doctors_model");
+const habib_Doctors_Model = require("../models/habibModel");
 
 const { dir } = require("console");
 const { dirname } = require("path");
@@ -41,7 +41,7 @@ const habibKBR_Nephro_data = JSON.parse(
 // IMPORT DATA INTO THE DATABASE
 const importData = async () => {
   try {
-    await habib_Doctors.create(habibKBR_Nephro_data);
+    await habib_Doctors_Model.create(habibKBR_Nephro_data);
     console.log("Data successfully loaded into database !");
   } catch (err) {
     console.log(err);
@@ -52,7 +52,7 @@ const importData = async () => {
 // DELETE ALL DATA FROM THE DATABASE COLLECTION
 const deleteData = async () => {
   try {
-    await habib_Doctors.deleteMany();
+    await habib_Doctors_Model.deleteMany();
     console.log("Data successfully deleted from database !");
   } catch (err) {
     console.log(err);
