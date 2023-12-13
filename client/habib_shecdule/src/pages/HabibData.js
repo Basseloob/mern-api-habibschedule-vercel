@@ -78,7 +78,8 @@ const HabibData = () => {
       .get(
         // "http://localhost:3001/habibUrl/habibSchedule_Nephrology"
         // "https://habib-schedule-vercel-hosted.vercel.app/habibUrl/habibSchedule_Nephrology"
-        "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Nephrology"
+        // "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Nephrology"
+        "http://localhost:3001/habibSchedule_Nephrology"
       )
       .then((response) => {
         // console.log(response.data);

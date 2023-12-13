@@ -3,15 +3,15 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const router = express.Router();
+
 // const RegisterModel = require("./models/Register");
 const habib_Doctors_Model = require("./models/habibModel");
-
+// "https://mern-api-habibschedule-vercel-frontend.vercel.app"
+// "http://localhost:3000/"
 app.use(
   cors({
-    origin: [
-      "https://mern-api-habibschedule-vercel-frontend.vercel.app/",
-      // "http://localhost:3000/",
-    ],
+    origin: ["https://mern-api-habibschedule-vercel-frontend.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -25,14 +25,17 @@ mongoose
   .connect(
     // "mongodb+srv://basseloob:Basilpsp9111@alhabib-cluster.nnbcxyh.mongodb.net/testname2?retryWrites=true&w=majority"
     // "mongodb://basseloob:Basilpsp9111@ac-7hgzxvl-shard-00-00.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-01.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-02.nnbcxyh.mongodb.net:27017/testname2?ssl=true&replicaSet=atlas-x2jk5t-shard-0&authSource=admin&retryWrites=true&w=majority"
-    "mongodb://basseloob:Basilpsp9111@ac-7hgzxvl-shard-00-00.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-01.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-02.nnbcxyh.mongodb.net:27017/Habib_Doctors?replicaSet=atlas-x2jk5t-shard-0&ssl=true&authSource=admin"
+    // "mongodb://basseloob:Basilpsp9111@ac-7hgzxvl-shard-00-00.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-01.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-02.nnbcxyh.mongodb.net:27017/Habib_Doctors?replicaSet=atlas-x2jk5t-shard-0&ssl=true&authSource=admin"
+    "mongodb://basseloob:Basilpsp9111@ac-7hgzxvl-shard-00-00.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-01.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-02.nnbcxyh.mongodb.net:27017/Habib_Doctors?ssl=true&replicaSet=atlas-x2jk5t-shard-0&authSource=admin&retryWrites=true&w=majority"
   )
   .then(() => {
     console.log("mongoDB connected.");
   });
 
 // /\//\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/
-// routes
+// Routes :
+
+// app.use("/habibUrl", habibRouter);
 
 app.get("/", (req, res) => {
   res.json("Hello");
@@ -58,7 +61,7 @@ app.get("/habibSchedule_Nephrology", async (req, res) => {
 
     // 4) Response :
     // res.json(filePath);
-    res.json({ data: mongoDB_data });
+    res.json(mongoDB_data);
   } catch (error) {
     console.error("Error in /habibSchedule Nephro route:", error);
     res.status(500).json({ error: "Internal Server Error" });
