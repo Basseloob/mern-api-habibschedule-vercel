@@ -8,9 +8,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "https://mern-api-habibschedule-vercel-frontend.vercel.app/habibData#",
-    ],
+    origin: ["https://mern-api-habibschedule-vercel-frontend.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -22,7 +20,8 @@ app.use(express.json());
 
 mongoose
   .connect(
-    "mongodb+srv://basseloob:Basilpsp9111@alhabib-cluster.nnbcxyh.mongodb.net/testname2?retryWrites=true&w=majority"
+    // "mongodb+srv://basseloob:Basilpsp9111@alhabib-cluster.nnbcxyh.mongodb.net/testname2?retryWrites=true&w=majority"
+    "mongodb://basseloob:Basilpsp9111@ac-7hgzxvl-shard-00-00.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-01.nnbcxyh.mongodb.net:27017,ac-7hgzxvl-shard-00-02.nnbcxyh.mongodb.net:27017/testname2?ssl=true&replicaSet=atlas-x2jk5t-shard-0&authSource=admin&retryWrites=true&w=majority"
   )
   .then(() => {
     console.log("mongoDB connected.");
