@@ -5,15 +5,15 @@ const cors = require("cors");
 const habibModel = require("./models/habibModel");
 
 const app = express();
+
 app.use(
   cors({
-    origin: [
-      "https://mern-api-habibschedule-vercel-frontend.vercel.app/habibData#",
-    ],
+    origin: ["https://mern-api-habibschedule-vercel-frontend.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true,
   })
 );
+
 app.use(express.json());
 
 // /\//\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/
