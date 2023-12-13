@@ -8,7 +8,9 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://mern-api-habibschedule-vercel-frontend.vercel.app"],
+    origin: [
+      "https://mern-api-habibschedule-vercel-frontend.vercel.app/habibData#",
+    ],
     methods: ["POST", "GET"],
     credentials: true,
   })
