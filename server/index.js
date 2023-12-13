@@ -43,7 +43,7 @@ app.get("/habibSchedule_Nephrology", async (req, res) => {
     // const filePath = require(`../output/${sanitized_Clinic_Parameter_Link}`);
 
     // 1) Get the Data from mongoDB :
-    const mongoDB_data = await habib_Doctors_Model.find({}); // 4) Response :
+    const mongoDB_data = await habibModel.find({}); // 4) Response :
     console.log("MongoDB Data:", mongoDB_data);
 
     // res.json(filePath);
