@@ -88,7 +88,13 @@ function App() {
               <a href="#" onClick={showMowasatData}>
                 Al-Mowasat
               </a> */}
-              <Link to="/habibData" onClick={showHabibData}>
+              <Link
+                to="/habibData"
+                onClick={(e) => {
+                  e.preventDefault();
+                  showHabibData();
+                }}
+              >
                 Al-habib
               </Link>
               <Link to="/maneaData" onClick={showManeaData}>
