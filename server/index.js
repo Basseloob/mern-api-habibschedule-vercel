@@ -11,7 +11,10 @@ const habib_Doctors_Model = require("./models/habibModel");
 // "http://localhost:3000/"
 app.use(
   cors({
-    origin: ["https://mern-api-habibschedule-vercel-frontend.vercel.app"],
+    origin: [
+      "https://mern-api-habibschedule-vercel-frontend.vercel.app",
+      // "http://localhost:3000/",
+    ],
     methods: ["POST", "GET"],
     credentials: true,
   })
