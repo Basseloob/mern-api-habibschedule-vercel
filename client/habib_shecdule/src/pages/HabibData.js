@@ -77,7 +77,7 @@ const HabibData = () => {
     axios
       .get(
         // "http://localhost:3001/habibSchedule_Nephrology"
-        "https://mern-api-habibschedule-vercel-server.vercel.app/habibData/habibSchedule_Nephrology"
+        "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Nephrology"
       )
       .then((response) => {
         // console.log(response.data);
