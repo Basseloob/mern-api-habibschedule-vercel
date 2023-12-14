@@ -88,7 +88,7 @@ function App() {
               <a href="#" onClick={showMowasatData}>
                 Al-Mowasat
               </a> */}
-              <Link to="#" onClick={showHabibData}>
+              <Link to="/habibData" onClick={showHabibData}>
                 Al-habib
               </Link>
               <Link to="/maneaData" onClick={showManeaData}>

@@ -60,12 +60,10 @@ const HabibData = () => {
     const innerText = event.target.innerText;
     setChooseClinic(innerText);
 
-    axios
-      .get("http://localhost:3001/habibUrl/habibSchedule_Endo")
-      .then((response) => {
-        console.log(response.data);
-        setAllDoctors(response.data);
-      });
+    axios.get("http://localhost:3001/habibSchedule_Endo").then((response) => {
+      console.log(response.data);
+      setAllDoctors(response.data);
+    });
   };
 
   // Nepherology : \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

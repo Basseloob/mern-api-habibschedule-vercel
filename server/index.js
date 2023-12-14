@@ -7,12 +7,11 @@ const router = express.Router();
 
 // const RegisterModel = require("./models/Register");
 const habib_Doctors_Model = require("./models/habibModel");
-// "https://mern-api-habibschedule-vercel-frontend.vercel.app"
-// "http://localhost:3000/"
+
 app.use(
   cors({
     origin: [
-      "https://mern-api-habibschedule-vercel-frontend.vercel.app",
+      "https://mern-api-habibschedule-vercel-frontend.vercel.app/",
       // "http://localhost:3000/",
     ],
     methods: ["POST", "GET"],
