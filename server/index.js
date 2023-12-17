@@ -43,6 +43,44 @@ app.get("/", (req, res) => {
   res.json("Hello");
 });
 
+app.get("/habibSchedule_FM", async (req, res) => {
+  try {
+    const mongoDB_data = await habib_Doctors_Model.find({
+      Speciality: "FAMILY MEDICINE",
+    });
+
+    if (mongoDB_data.length === 0) {
+      return res.status(404).json({ error: "No data found!!!" });
+    }
+
+    console.log("MongoDB Data:", mongoDB_data);
+
+    res.json(mongoDB_data);
+  } catch (error) {
+    console.error("Error in /habibSchedule FM route:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/habibSchedule_IM", async (req, res) => {
+  try {
+    const mongoDB_data = await habib_Doctors_Model.find({
+      Speciality: "INTERNAL MEDICINE CLINIC",
+    });
+
+    if (mongoDB_data.length === 0) {
+      return res.status(404).json({ error: "No data found!!!" });
+    }
+
+    console.log("MongoDB Data:", mongoDB_data);
+
+    res.json(mongoDB_data);
+  } catch (error) {
+    console.error("Error in /habibSchedule IM route:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.get("/habibSchedule_Nephrology", async (req, res) => {
   try {
     // 1) Get the Data from VScode file :
@@ -53,7 +91,9 @@ app.get("/habibSchedule_Nephrology", async (req, res) => {
     // const filePath = require(`../output/${sanitized_Clinic_Parameter_Link}`);
 
     // 1) Get the Data from mongoDB :
-    const mongoDB_data = await habib_Doctors_Model.find({});
+    const mongoDB_data = await habib_Doctors_Model.find({
+      Speciality: "NEPHROLOGY",
+    });
 
     if (mongoDB_data.length === 0) {
       return res.status(404).json({ error: "No data found!!!" });

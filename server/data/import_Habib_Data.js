@@ -29,6 +29,25 @@ mongoose
   .catch((err) => console.log("Server Connection Error ", err));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+// Array to store parsed data from multiple files
+// const allData = [];
+
+// const filePaths = [
+//   `${__dirname}/nephroKBR.json`,
+//   // `${__dirname}/family.json`,
+//   // `${__dirname}/internal.json`,
+// ];
+
+// filePaths.forEach((filePath) => {
+//   try {
+//     const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+//     allData.push(jsonData);
+//   } catch (err) {
+//     console.error(
+//       `Error reading or parsing file ${filePath}: ${error.message}`
+//     );
+//   }
+// });
 
 const habibKBR_Nephro_data = JSON.parse(
   fs.readFileSync(
@@ -41,6 +60,7 @@ const habibKBR_Nephro_data = JSON.parse(
 // IMPORT DATA INTO THE DATABASE
 const importData = async () => {
   try {
+    // await habib_Doctors_Model.create(allData);
     await habib_Doctors_Model.create(habibKBR_Nephro_data);
     console.log("Data successfully loaded into database !");
   } catch (err) {

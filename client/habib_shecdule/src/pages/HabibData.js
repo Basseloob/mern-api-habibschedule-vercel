@@ -21,7 +21,8 @@ const HabibData = () => {
     axios
       .get(
         // "https://habib-schedule-vercel-hosted.vercel.app/habibUrl/habibSchedule_FM"
-        "http://localhost:3001/habibUrl/habibSchedule_FM"
+        // "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_FM"
+        "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_FM"
       )
       .then((response) => {
         console.log(response.data);
@@ -35,7 +36,10 @@ const HabibData = () => {
     setChooseClinic(innerText);
 
     axios
-      .get("http://localhost:3001/habibUrl/habibSchedule_IM")
+      .get(
+        // "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_IM"
+        "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_IM"
+      )
       .then((response) => {
         console.log(response.data);
         setAllDoctors(response.data);
@@ -48,7 +52,9 @@ const HabibData = () => {
     setChooseClinic(innerText);
 
     axios
-      .get("http://localhost:3001/habibUrl/habibSchedule_Cardio")
+      .get(
+        "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Cardio"
+      )
       .then((response) => {
         console.log(response.data);
         setAllDoctors(response.data);
@@ -60,10 +66,14 @@ const HabibData = () => {
     const innerText = event.target.innerText;
     setChooseClinic(innerText);
 
-    axios.get("http://localhost:3001/habibSchedule_Endo").then((response) => {
-      console.log(response.data);
-      setAllDoctors(response.data);
-    });
+    axios
+      .get(
+        "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Endo"
+      )
+      .then((response) => {
+        console.log(response.data);
+        setAllDoctors(response.data);
+      });
   };
 
   // Nepherology : \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
