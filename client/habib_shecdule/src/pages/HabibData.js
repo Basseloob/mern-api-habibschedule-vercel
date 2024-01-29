@@ -75,22 +75,40 @@ const HabibData = () => {
   };
 
   // Nepherology : \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-  const choosedClinic_Nepherology = (event) => {
-    // 1) Change the Button Name :
-    const innerText = event.target.innerText;
-    console.log("Nehphro innerText : ", innerText);
-    setChooseClinic(innerText);
+  // const choosedClinic_Nepherology = (event) => {
+  //   // 1) Change the Button Name :
+  //   const innerText = event.target.innerText;
+  //   console.log("Nehphro innerText : ", innerText);
+  //   setChooseClinic(innerText);
 
-    // 2) Get the response from NodeJs :
-    axios
-      .get(
-        // "http://localhost:3001/habibSchedule_Nephrology"
-        "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Nephrology"
-      )
-      .then((response) => {
-        console.log(response.data);
-        setAllDoctors_Data(response.data);
-      });
+  //   // 2) Get the response from NodeJs :
+  //   axios
+  //     .get(
+  //       "http://localhost:3001/habibSchedule_Nephrology"
+  //       // "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Nephrology"
+  //     )
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setAllDoctors_Data(response.data);
+  //     });
+  // };
+  const choosedClinic_Nepherology = (event) => {
+    if (event) {
+      // 1) Change the Button Name:
+      const innerText = event.target.innerText;
+      console.log("Nephro innerText: ", innerText);
+      setChooseClinic(innerText);
+
+      // 2) Get the response from NodeJs:
+      axios
+        .get("http://localhost:3001/habibSchedule_Nephrology")
+        .then((response) => {
+          console.log(response.data);
+          setAllDoctors_Data(response.data);
+        });
+    } else {
+      console.error("Event object is undefined");
+    }
   };
 
   return (
@@ -110,41 +128,43 @@ const HabibData = () => {
     <section className="section-doctors">
       <section className="section-speciality">
         <button
-          onClick={() => {
-            choosedClinic_FamilyMedicine();
+          onClick={(event) => {
+            choosedClinic_FamilyMedicine(event);
           }}
         >
           Family Medicine
         </button>
         <button
-          onClick={() => {
-            choosedClinic_Endocrinology();
+          onClick={(event) => {
+            choosedClinic_Endocrinology(event);
           }}
         >
           Endocrinology
         </button>
         <button
-          onClick={() => {
-            choosedClinic_InternalMedicine();
+          onClick={(event) => {
+            choosedClinic_InternalMedicine(event);
           }}
         >
           Internal Medicine
         </button>
         <button
-          onClick={() => {
-            choosedClinic_Cardiology();
+          onClick={(event) => {
+            choosedClinic_Cardiology(event);
           }}
         >
           Cardiology
         </button>
         <button
           on
-          onClick={() => {
-            choosedClinic_Nepherology();
+          onClick={(event) => {
+            choosedClinic_Nepherology(event);
           }}
         >
           Nepherology
         </button>
+
+        <h2>{chooseClinic}</h2>
       </section>
 
       <div className="container center-text">
