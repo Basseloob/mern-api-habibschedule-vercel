@@ -267,13 +267,14 @@ header {
 
   .main-nav {
     /* Make Transparent */
-    background-color: rgba(255, 255, 255, 0.97);
+    /* background-color: rgba(255, 255, 255, 0.97); */
+    background-color: rgba(223, 153, 153, 0.97);
     /* if this absolute the parent element must be position RELATIVE */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 30vh;
 
     display: flex;
     align-items: center;
@@ -282,6 +283,8 @@ header {
     /* Animation */
     transition: all 0.5s ease-out;
     transform: translateX(100%);
+    /* transform: translateX(0); */
+
     /* In the Body */
     /* overflow-x: hidden; */
 
@@ -322,6 +325,7 @@ header {
   .main-nav-link:visited {
     font-size: 1.8rem;
     font-weight: bold;
+    /* background-color: red; */
   }
 
   .main-nav-link:hover,

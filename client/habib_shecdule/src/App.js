@@ -25,7 +25,6 @@ function App() {
   const changeImageSource = () => {
     // const nextImageSource = imageSource === list_Icon ? clock_Icon : list_Icon;
     // setImageSource(nextImageSource);
-
     // Toggle the visibility of the navigation elements
     setIsNavVisible(true);
   };
@@ -50,6 +49,7 @@ function App() {
               Close
             </h3>
           </div>
+
           <li>
             <Link
               className="main-nav-link"
@@ -124,9 +124,12 @@ function App() {
               src={require("./img/clock-logo.png")}
             />
           </a>
+
+          {/* Welcome */}
           <h2>{chosenHospital}</h2>
+
           {/* Nav Elements */}
-          {showNavigation_Elements()}
+          {/* {showNavigation_Elements()} */}
           {/* {isElementVisible} */}
 
           <button className="btn-mobile-nav">
@@ -144,6 +147,30 @@ function App() {
             />
           </button>
         </header>
+
+        <div className="gird">
+          <Link
+            style={{ marginRight: "1.5rem" }}
+            to="/habibData"
+            onClick={showHabibData}
+          >
+            Al-habib
+          </Link>
+          <Link
+            style={{ marginRight: "1.5rem" }}
+            to="/maneaData"
+            onClick={showManeaData}
+          >
+            Al-Manea
+          </Link>
+          <Link
+            style={{ marginRight: "1.5rem" }}
+            to="/mowasatData"
+            onClick={showMowasatData}
+          >
+            Al-Mowasat
+          </Link>
+        </div>
 
         <Routes>
           <Route path="/" element={<Home />} />
