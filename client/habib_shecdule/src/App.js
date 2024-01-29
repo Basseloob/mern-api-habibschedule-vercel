@@ -1,35 +1,8 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import axios from "axios";
-// Pages :
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import RegisteredUsers from "./pages/RegisteredUsers";
@@ -38,81 +11,148 @@ import HabibData from "./pages/HabibData";
 import ManeaData from "./pages/ManeaData";
 import MowasatData from "./pages/MowasatData";
 
+// Icons
+// import { render } from "react-dom";
+// import { ListOutline } from "react-ionicons";
+import list_Icon from "./img/icons8-list-24.png";
+import clock_Icon from "./img/clock-logo.png";
+
 function App() {
-  const [chosenHospital, setChoosenHsopital] = useState("Welcome");
+  const [chosenHospital, setChosenHospital] = useState("Welcome");
+  const [imageSource, setImageSource] = useState(list_Icon);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+
+  const changeImageSource = () => {
+    // const nextImageSource = imageSource === list_Icon ? clock_Icon : list_Icon;
+    // setImageSource(nextImageSource);
+
+    // Toggle the visibility of the navigation elements
+    setIsNavVisible(true);
+  };
+
+  const showNavigation_Elements = () => {
+    return (
+      <nav
+        className={`main-nav ${isNavVisible ? "nav-visible" : "nav-hidden"}`}
+        style={{
+          transition: "all 0.4s ease-in",
+          transform: isNavVisible ? "translate(0)" : "translate(100%)",
+        }}
+      >
+        <ul className="main-nav-list">
+          <div>
+            <h3
+              onClick={() => {
+                setIsNavVisible(false);
+              }}
+              style={{ marginTop: "-3rem", color: "red" }}
+            >
+              Close
+            </h3>
+          </div>
+          <li>
+            <Link
+              className="main-nav-link"
+              to="/habibData"
+              onClick={() => {
+                showHabibData();
+                setIsNavVisible(false);
+              }}
+            >
+              Al-habib
+            </Link>
+          </li>
+          <li>
+            {/* <a className="main-nav-link" href="#mowasatDammam">
+              Al-Mowasat
+            </a> */}
+            <Link
+              className="main-nav-link"
+              to="/mowasatData"
+              onClick={() => {
+                showMowasatData();
+                setIsNavVisible(false);
+              }}
+            >
+              Al-Mowasat
+            </Link>
+          </li>
+          <li>
+            {/* <a className="main-nav-link" href="#manea">
+              Al-Manea
+            </a> */}
+            <Link
+              className="main-nav-link"
+              to="/maneaData"
+              onClick={() => {
+                showManeaData();
+                setIsNavVisible(false);
+              }}
+            >
+              Al-Manea
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    );
+  };
 
   const showHabibData = () => {
     console.log("this is Al-Habib Hospital");
-    setChoosenHsopital("Al-Habib");
+    setChosenHospital("Al-Habib");
   };
 
   const showManeaData = () => {
     console.log("this is Manea Hospital");
-    setChoosenHsopital("Al-Manea");
+    setChosenHospital("Al-Manea");
   };
 
   const showMowasatData = () => {
     console.log("this is Moawast Hospital");
-    setChoosenHsopital("Al-Mowasat");
+    setChosenHospital("Al-Mowasat");
   };
 
-  //////////////////////////////////////////////////////////////
-
   return (
-    <div
-      className="body"
-      style={{ content: "width=device-width", scale: "1.0" }}
-    >
+    <div className="body">
       <Router>
-        <header>
-          <div className="links">
-            <a href="/login">Login </a>
-            <a href="/register">Registeration</a>
-            <a href="/">Home Page</a>
-            {/* <Link to="/login">Login</Link>
-          <Link to="/register">Registeration</Link>
+        <header className="header nav-open">
+          {/* <header className="header"> */}
+          <a href="#">
+            <img
+              className="logo"
+              alt="clock logo"
+              src={require("./img/clock-logo.png")}
+            />
+          </a>
+          <h2>{chosenHospital}</h2>
+          {/* Nav Elements */}
+          {showNavigation_Elements()}
+          {/* {isElementVisible} */}
 
-          <Link to="/">Home Page</Link> */}
-            <h3 style={{ paddingLeft: 100 }}> {chosenHospital}</h3>
-          </div>
-
-          <div className="dropdown">
-            <button className="dropbtn">Show Hospitals</button>
-            <div className="dropdown-content">
-              {/* <a href="#" onClick={showHabibData}>
-                Al-habib
-              </a>
-              <a href="#" onClick={showManeaData}>
-                Al-Manea
-              </a>
-              <a href="#" onClick={showMowasatData}>
-                Al-Mowasat
-              </a> */}
-              <Link to="/habibData" onClick={showHabibData}>
-                Al-habib
-              </Link>
-              <Link to="/maneaData" onClick={showManeaData}>
-                Al-Manea
-              </Link>
-              <Link to="/mowasatData" onClick={showMowasatData}>
-                Al-Mowasat
-              </Link>
-            </div>
-          </div>
+          <button className="btn-mobile-nav">
+            <img
+              className="icon-mobile-nav"
+              data-name="open-menu-outline"
+              alt="list logo"
+              src={imageSource}
+              onClick={() => {
+                // OnClicking it will change the logo & change nav showing or not showing.
+                changeImageSource();
+                // setIsElementVisible(showNavigation_Elements());
+                // setIsNavVisible(showNavigation_Elements());
+              }}
+            />
+          </button>
         </header>
 
         <Routes>
-          <Route path="/" exact Component={Home}></Route>
-          <Route path="/login" exact Component={Login}></Route>
-          <Route path="/register" exact Component={Register}></Route>
-          <Route path="/habibData" exact Component={HabibData}></Route>
-          <Route path="/maneaData" exact Component={ManeaData}></Route>
-          <Route path="/mowasatData" exact Component={MowasatData}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/habibData" element={<HabibData />} />
+          <Route path="/maneaData" element={<ManeaData />} />
+          <Route path="/mowasatData" element={<MowasatData />} />
         </Routes>
-
-        {/* <footer>
-        <p>Basseloob</p>
-      </footer> */}
       </Router>
     </div>
   );

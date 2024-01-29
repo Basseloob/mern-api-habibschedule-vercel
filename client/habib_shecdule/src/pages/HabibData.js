@@ -1,15 +1,11 @@
-// First add choose city
-// Second after choosing the city - choose the hospital in that city - as Ryiadh has more than 4 hospitals.
-// Add mySQL or MongoDB connection as every thursday puppeteer function will run and save the data into
-//   the DB and then vercel will read the saved data from the DB mySQL or Mongo.
-
+import "../pages/pagesCSS/HabibData.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import axios from "axios";
 
 const HabibData = () => {
   const [chooseClinic, setChooseClinic] = useState("Choose Clinic");
-  const [allDoctors, setAllDoctors] = useState([]);
+  const [allDoctors_Data, setAllDoctors_Data] = useState([]);
   const [doctorAvailableTimes, setDoctorAvailableTimes] = useState([]);
 
   // Family Medicine : \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -26,15 +22,17 @@ const HabibData = () => {
       )
       .then((response) => {
         console.log(response.data);
-        setAllDoctors(response.data);
+        setAllDoctors_Data(response.data);
       });
   };
 
   // Internal Medicine : \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   const choosedClinic_InternalMedicine = (event) => {
+    // 1)
     const innerText = event.target.innerText;
     setChooseClinic(innerText);
 
+    // 2)
     axios
       .get(
         // "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_IM"
@@ -42,7 +40,7 @@ const HabibData = () => {
       )
       .then((response) => {
         console.log(response.data);
-        setAllDoctors(response.data);
+        setAllDoctors_Data(response.data);
       });
   };
 
@@ -57,7 +55,7 @@ const HabibData = () => {
       )
       .then((response) => {
         console.log(response.data);
-        setAllDoctors(response.data);
+        setAllDoctors_Data(response.data);
       });
   };
 
@@ -72,152 +70,100 @@ const HabibData = () => {
       )
       .then((response) => {
         console.log(response.data);
-        setAllDoctors(response.data);
+        setAllDoctors_Data(response.data);
       });
   };
 
   // Nepherology : \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   const choosedClinic_Nepherology = (event) => {
+    // 1) Change the Button Name :
     const innerText = event.target.innerText;
     console.log("Nehphro innerText : ", innerText);
     setChooseClinic(innerText);
 
+    // 2) Get the response from NodeJs :
     axios
       .get(
         // "http://localhost:3001/habibSchedule_Nephrology"
         "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Nephrology"
       )
       .then((response) => {
-        // console.log(response.data);
-        setAllDoctors(response.data);
+        console.log(response.data);
+        setAllDoctors_Data(response.data);
       });
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div className="habibPageContainer">
-        {/* <div className="basicInfo"></div> */}
-        <div className="column1">
-          <div className="dropdown">
-            <button className="dropbtn2">{chooseClinic}</button>
-            <div className="dropdown-content">
-              <a href="#" onClick={choosedClinic_FamilyMedicine}>
-                Family Medicine
-              </a>
-              <a href="#" onClick={choosedClinic_InternalMedicine}>
-                Internal Medicine
-              </a>
-              <a href="#" onClick={choosedClinic_Endocrinology}>
-                Endocrinology
-              </a>
-              <a href="#" onClick={choosedClinic_Cardiology}>
-                Cardiology
-              </a>{" "}
-              <a href="#" onClick={choosedClinic_Nepherology}>
-                Nephrology
-              </a>
-            </div>
-          </div>
-        </div>
+    <>
+      <section className="section-speciality">
+        <button onClick={choosedClinic_FamilyMedicine}>Family Medicine</button>
+        <button onClick={choosedClinic_Endocrinology}>Endocrinology</button>
+        <button onClick={choosedClinic_InternalMedicine}>
+          Internal Medicine
+        </button>
+        <button onClick={choosedClinic_Cardiology}>Cardiology</button>
+        <button on onClick={choosedClinic_Nepherology}>
+          Nepherology
+        </button>
+      </section>
 
-        {/* List Of Doctors */}
+      <section className="section-doctors">
+        {/* <div className="container center-text">
+        <span className="subheading" onClick={choosedClinic_Nepherology}>
+          Speciality
+        </span>
+      </div> */}
 
-        <div className="column2" style={{ marginLeft: "6rem", width: "95vh" }}>
-          {allDoctors.map((doctor, key) => {
+        <div className="container grid grid--2-cols">
+          {allDoctors_Data.map((doctor, key) => {
+            //   {/* 1) First checking if Times array is not empty - No Print the Doctor */}
+
             return (
-              <div className="doctorData" key={key}>
-                <div className="img&name" style={{ marginRight: "5rem" }}>
-                  <img src={`${doctor.Img}`}></img>
-                  <h4>
-                    {key + 1}- {doctor.Name}
-                  </h4>
+              <div className="doctor" key={key}>
+                <div className="image">
+                  <img
+                    className="doctor-img"
+                    alt="doctor photo"
+                    // src="https://hmgwebservices.com/Images/MobileImages/KHOBAR/304264.png"
+                    src={`${doctor.Img}`}
+                  ></img>
                 </div>
 
-                <div
-                  className="date_times"
-                  style={{
-                    width: "700px",
-                    overflowX: "visible",
-                    whiteSpace: "nowrap",
-                    // marginLeft: "5rem",
-                  }}
-                >
-                  <div
-                    className="element"
-                    style={{
-                      maxWidth: "30px",
-                      borderBottom: "1px solid #ccc",
-                      paddingBottom: "10px",
-                    }}
-                  >
-                    {/* <h4
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(4, 1fr)",
-                        gap: "5px",
-                        // gridAutoRows: "minmax(100px, auto)",
-                      }}
-                    > */}
-                    {/* Times : */}
-                    {doctor.DateObj.map((time, id) => (
-                      <div
-                        key={id}
-                        style={{
-                          width: "150px",
-                          // marginRight: "10px",
-                          marginLeft: "20rem",
-                          // flexDirection: "row",
-                          // alignItems: "center",
-                          // justifyContent: "flex-end",
-                        }}
-                      >
-                        {/* Check if the date is not a duplicate */}
+                <div className="doctor-content">
+                  <h5 className="tag tag--name">
+                    Dr. {doctor.Name.split(" ").slice(0, 1)}
+                  </h5>
 
-                        {id === 0 ||
-                        time.Date !== doctor.DateObj[id - 1].Date ? (
-                          <>
-                            <h3
-                              style={{
-                                color: "brown",
-                                marginBottom: "5px", // Add margin bottom for spacing
-                              }}
-                            >
-                              {time.Date}
-                            </h3>
-                            <ul
-                              style={{
-                                color: "blue",
-                                gap: "5px",
-                                display: "flex",
-                              }}
-                            >
-                              {time.Times.map((time, timeIndex) => (
-                                <li key={timeIndex}>
-                                  <h4>{time}</h4>
-                                </li>
-                              ))}
-                            </ul>
-                          </>
-                        ) : null}
-                      </div>
-                    ))}
-                    {/* </h4> */}
-                  </div>
+                  <h5 className="tag tag--speciality">{doctor.Speciality}</h5>
+
+                  {doctor.DateObj.map(
+                    (DateObj, dateIndex) =>
+                      //   {/* 1) First checking if Times array is not empty - No Print the Date */}
+                      //   {/* 2) Print the first Time in the array and the Last index using && */}
+                      // DateObj.Times.length > 0 && (
+                      DateObj.Times.length > 0 && (
+                        <h5 key={dateIndex} className="tag tag--date">
+                          {DateObj.Date}
+                          <ul className="time-attributes">
+                            <li className="times">
+                              {/* From */}
+                              <p className="time">{`  ${DateObj.Times[0]}  `}</p>
+                              To
+                              <p className="time">
+                                {` ${DateObj.Times[DateObj.Times.length - 1]}`}{" "}
+                              </p>
+                            </li>
+                          </ul>
+                        </h5>
+                      )
+                  )}
                 </div>
               </div>
             );
           })}
         </div>
-      </div>
-
-      <div className="listOfAppointments"></div>
-    </div>
+      </section>
+    </>
   );
 };
 

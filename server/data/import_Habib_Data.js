@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { get_Habib_Data } = require("../middleWares/habibPuppeteer_Ware_copy");
 // const dotenv = require("dotenv"); //  --> Enviroment variable...need to be before ./app file.
 // dotenv.config({ path: ".././config.env" });
 
@@ -49,19 +50,54 @@ mongoose
 //   }
 // });
 
-const habibKBR_Nephro_data = JSON.parse(
-  fs.readFileSync(
-    // `${__dirname}/httpshmgeservices.comloginProjectID=60&ClinicID=30&StrDate=%27%27&lang=en.json`,
-    `${__dirname}/nephroKBR.json`,
-    "utf-8"
-  )
-);
+// const habibKBR_Nephro_data = JSON.parse(
+//   fs.readFileSync(
+//     // `${__dirname}/httpshmgeservices.comloginProjectID=60&ClinicID=30&StrDate=%27%27&lang=en.json`,
+//     `${__dirname}/nephroKBR.json`,
+//     "utf-8"
+//   )
+// );
+// const habibData = JSON.parse(
+//   fs.readFileSync(
+//     // `${__dirname}/httpshmgeservices.comloginProjectID=60&ClinicID=30&StrDate=%27%27&lang=en.json`,
+//     `${__dirname}/habibData.json`,
+//     "utf-8"
+//   )
+// );
+
+// Khobar : \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+const habib_KBR_Im_Url =
+  "https://hmgeservices.com/login?ProjectID=60&ClinicID=1&StrDate=%27%27&lang=en";
+const habib_KBR_Family_Url =
+  "https://hmgeservices.com/login?ProjectID=60&ClinicID=26&StrDate=%27%27&lang=en";
+const habib_KBR_Cardio_Url =
+  "https://hmgeservices.com/login?ProjectID=60&ClinicID=21&StrDate=%27%27&lang=en";
+const habib_KBR_Endo_Url =
+  "https://hmgeservices.com/login?ProjectID=60&ClinicID=14&StrDate=%27%27&lang=en";
+const habib_KBR_Nephro_Url =
+  'https://hmgeservices.com/login?ProjectID=60&ClinicID=30&StrDate=%27%27&lang=en"';
 
 // IMPORT DATA INTO THE DATABASE
 const importData = async () => {
   try {
-    // await habib_Doctors_Model.create(allData);
-    await habib_Doctors_Model.create(habibKBR_Nephro_data);
+    // await get_Habib_Data(habib_KBR_Family_Url);
+    await get_Habib_Data(habib_KBR_Im_Url);
+    await get_Habib_Data(habib_KBR_Cardio_Url);
+    await get_Habib_Data(habib_KBR_Endo_Url);
+    await get_Habib_Data(habib_KBR_Nephro_Url);
+
+    // const habibData = JSON.parse(
+    //   fs.readFileSync(
+    //     // `${__dirname}/httpshmgeservices.comloginProjectID=60&ClinicID=30&StrDate=%27%27&lang=en.json`,
+    //     `${__dirname}/habibData.json`,
+    //     "utf-8"
+    //   )
+    // );
+
+    // // await habib_Doctors_Model.create(allData);
+    // // await habib_Doctors_Model.create(habibKBR_Nephro_data);
+    // await habib_Doctors_Model.create(habibData);
+
     console.log("Data successfully loaded into database !");
   } catch (err) {
     console.log(err);

@@ -6,17 +6,19 @@ const cors = require("cors");
 const router = express.Router();
 
 // const RegisterModel = require("./models/Register");
+const get_Habib_Data = require("./middleWares/habibPuppeteer_Ware_copy");
 const habib_Doctors_Model = require("./models/habibModel");
 
 app.use(
-  cors({
-    origin: [
-      "https://mern-api-habibschedule-vercel-frontend.vercel.app",
-      // "http://localhost:3000/",
-    ],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
+  cors()
+  //   {
+  //   origin: [
+  //     // "https://mern-api-habibschedule-vercel-frontend.vercel.app"s,
+  //     "http://localhost:3000/",
+  //   ],
+  //   methods: ["POST", "GET"],
+  //   credentials: true,
+  // }
 );
 
 app.use(express.json());
@@ -36,6 +38,17 @@ mongoose
 
 // /\//\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/
 // Routes :
+// Spciality Links : \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+const habib_Im_Url =
+  "https://hmgeservices.com/login?ProjectID=60&ClinicID=1&StrDate=%27%27&lang=en";
+const habib_Family_Url =
+  "https://hmgeservices.com/login?ProjectID=60&ClinicID=26&StrDate=%27%27&lang=en";
+const habib_Cardio_Url =
+  "https://hmgeservices.com/login?ProjectID=60&ClinicID=21&StrDate=%27%27&lang=en";
+const habib_Endo_Url =
+  "https://hmgeservices.com/login?ProjectID=60&ClinicID=14&StrDate=%27%27&lang=en";
+const habib_Nephro_Url =
+  'https://hmgeservices.com/login?ProjectID=60&ClinicID=30&StrDate=%27%27&lang=en"';
 
 // app.use("/habibUrl", habibRouter);
 
@@ -92,7 +105,7 @@ app.get("/habibSchedule_Nephrology", async (req, res) => {
 
     // 1) Get the Data from mongoDB :
     const mongoDB_data = await habib_Doctors_Model.find({
-      Speciality: "NEPHROLOGY",
+      // Speciality: "NEPHROLOGY",
     });
 
     if (mongoDB_data.length === 0) {
@@ -125,6 +138,7 @@ app.get("/habibSchedule_Nephrology", async (req, res) => {
 //     .catch((err) => res.json(err));
 // });
 
-app.listen(3001, () => {
-  console.log("Server is Running");
+const port = 3001;
+app.listen(port, () => {
+  console.log(`Server is Running on port ${port}`);
 });
