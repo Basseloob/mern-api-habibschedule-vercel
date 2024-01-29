@@ -94,6 +94,44 @@ app.get("/habibSchedule_IM", async (req, res) => {
   }
 });
 
+app.get("/habibSchedule_Cardio", async (req, res) => {
+  try {
+    const mongoDB_data = await habib_Doctors_Model.find({
+      Speciality: "CARDIOLOGY",
+    });
+
+    if (mongoDB_data.length === 0) {
+      return res.status(404).json({ error: "No data found!!!" });
+    }
+
+    console.log("MongoDB Data:", mongoDB_data);
+
+    res.json(mongoDB_data);
+  } catch (error) {
+    console.error("Error in /habibSchedule IM route:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/habibSchedule_Endo", async (req, res) => {
+  try {
+    const mongoDB_data = await habib_Doctors_Model.find({
+      Speciality: "ENDOCRINE CLINIC",
+    });
+
+    if (mongoDB_data.length === 0) {
+      return res.status(404).json({ error: "No data found!!!" });
+    }
+
+    console.log("MongoDB Data:", mongoDB_data);
+
+    res.json(mongoDB_data);
+  } catch (error) {
+    console.error("Error in /habibSchedule IM route:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.get("/habibSchedule_Nephrology", async (req, res) => {
   try {
     // 1) Get the Data from VScode file :

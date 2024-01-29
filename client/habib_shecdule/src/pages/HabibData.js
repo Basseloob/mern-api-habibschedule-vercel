@@ -108,11 +108,11 @@ const HabibData = () => {
       </section>
 
       <section className="section-doctors">
-        {/* <div className="container center-text">
-        <span className="subheading" onClick={choosedClinic_Nepherology}>
-          Speciality
-        </span>
-      </div> */}
+        <div className="container center-text">
+          <span className="subheading" onClick={choosedClinic_Nepherology}>
+            Speciality
+          </span>
+        </div>
 
         <div className="container grid grid--2-cols">
           {allDoctors_Data.map((doctor, key) => {
