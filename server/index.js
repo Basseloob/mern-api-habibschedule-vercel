@@ -143,7 +143,7 @@ app.get("/habibSchedule_Nephrology", async (req, res) => {
 
     // 1) Get the Data from mongoDB :
     const mongoDB_data = await habib_Doctors_Model.find({
-      // Speciality: "NEPHROLOGY",
+      Speciality: "NEPHROLOGY",
     });
 
     if (mongoDB_data.length === 0) {
