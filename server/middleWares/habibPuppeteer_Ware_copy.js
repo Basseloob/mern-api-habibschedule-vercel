@@ -115,7 +115,7 @@ const get_Habib_Data = async (clinic) => {
         //    current week from MongoDB.
 
         // for (let i = 28; i < 33; i++) {
-        for (let i = 29; i < 33; i++) {
+        for (let i = 0; i < 14; i++) {
           // 1)
           await days_Btns[i].click();
           await page.waitForSelector("b.ng-tns-c12-0");
