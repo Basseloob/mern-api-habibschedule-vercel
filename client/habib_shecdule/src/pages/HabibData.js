@@ -101,7 +101,10 @@ const HabibData = () => {
 
       // 2) Get the response from NodeJs:
       axios
-        .get("http://localhost:3001/habibSchedule_Nephrology")
+        .get(
+          // "http://localhost:3001/habibSchedule_Nephrology"
+          "https://mern-api-habibschedule-vercel-server.vercel.app/habibSchedule_Nephrology"
+        )
         .then((response) => {
           console.log(response.data);
           setAllDoctors_Data(response.data);
@@ -197,10 +200,18 @@ const HabibData = () => {
                   (DateObj, dateIndex) =>
                     //   {/* 1) First checking if Times array is not empty - No Print the Date */}
                     //   {/* 2) Print the first Time in the array and the Last index using && */}
+                    //   {/* 3) prevent the Repeated Days that has been extracted from Puppeteer and saved in MongoDB Atlas */}
+
                     // DateObj.Times.length > 0 && (
-                    DateObj.Times.length > 0 && (
+                    DateObj.Times.length > 0 &&
+                    // Check if the current date is different from the previous date - PREVENT DOUBLICATES ;
+                    DateObj.Date !==
+                      (dateIndex > 0
+                        ? doctor.DateObj[dateIndex - 1].Date
+                        : null) && (
                       <h5 key={dateIndex} className="tag tag--date">
                         {DateObj.Date}
+
                         <ul className="time-attributes">
                           <li className="times">
                             {/* From */}

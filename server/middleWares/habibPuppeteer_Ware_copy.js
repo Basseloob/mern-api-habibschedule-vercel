@@ -13,8 +13,8 @@ const get_Habib_Data = async (clinic) => {
 
   await puppeteer
     .launch({
-      headless: true,
-      // headless: false,
+      // headless: true,
+      headless: false,
       executablePath:
         // "C:/Program Files/Google/Chrome/Application/chrome.exe",
         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -115,7 +115,7 @@ const get_Habib_Data = async (clinic) => {
         //    current week from MongoDB.
 
         // for (let i = 28; i < 33; i++) {
-        for (let i = 0; i < 14; i++) {
+        for (let i = 13; i <= 18; i++) {
           // 1)
           await days_Btns[i].click();
           await page.waitForSelector("b.ng-tns-c12-0");
@@ -149,11 +149,79 @@ const get_Habib_Data = async (clinic) => {
             times_Array.push(timesText);
           }
 
+          // 4)
+          // daysDate_Arr.push({ Date: dayDate_innerText, Times: times_Array });
           daysDate_Arr.push({ Date: dayDate_innerText, Times: times_Array });
           // daysDate_Arr.push({ Date: arial_DayDate_innerText });
         }
 
+        //////////////////////////////////////Test//////////////////////////////////////
+        //////////////////////////////////////Test//////////////////////////////////////
+        //////////////////////////////////////Test//////////////////////////////////////
+        // for (let i = 13; i <= 18; i++) {
+        //   // 1)
+        //   await days_Btns[i].click();
+        //   await page.waitForSelector("b.ng-tns-c12-0");
+        //   await page.waitForTimeout(2000);
+
+        //   // 2)
+        //   // const dayDate = await page.$("b.ng-tns-c12-0");
+        //   // const dayDate_innerText = await page.evaluate(
+        //   //   (el) => el.innerText,
+        //   //   dayDate
+        //   // );
+        //   const dayDate_innerText = await page.$eval("b.ng-tns-c12-0", (el) =>
+        //     el.innerText.trim()
+        //   );
+
+        //   // const arial_DayDate = await page.$eval("div.cal-cell-top[aria-label]");
+        //   // const arial_DayDate_innerText = await page.evaluate(
+        //   //   (el) => el.getAttribute("aria-label"),
+        //   //   arial_DayDate
+        //   // );
+
+        //   // 3)
+        //   const times_Array = [];
+        //   // await page.waitForSelector("div.timedate div.timepicker");
+        //   const times = await page.$$("div.timedate div.timepicker");
+        //   for (const divElement of times) {
+        //     const timesText = await page.evaluate(
+        //       (el) => el.innerText,
+        //       divElement
+        //     );
+        //     times_Array.push(timesText);
+        //   }
+
+        //   // 4) Check if dayDate_innerText already exists in daysDate_Arr
+        //   // Check if dayDate_innerText already exists in daysDate_Arr
+        //   var isDuplicate = daysDate_Arr.some(function (entry) {
+        //     return entry.Date === dayDate_innerText;
+        //   });
+
+        //   // If it's not a duplicate, push a new entry
+        //   if (!isDuplicate) {
+        //     daysDate_Arr.push({ Date: dayDate_innerText, Times: times_Array });
+        //   } else {
+        //     // Handle duplicate entry if needed
+        //     console.log("Duplicate entry found for " + dayDate_innerText);
+        //   }
+        // }
+
+        //////////////////////////////////////Test//////////////////////////////////////
+        //////////////////////////////////////Test//////////////////////////////////////
+        //////////////////////////////////////Test//////////////////////////////////////
+
         console.log("daysDate_Arr  : ", daysDate_Arr);
+
+        // // Preventing Doublicates :
+        // const unique_daysDate_Arr = daysDate_Arr.map((Date) => {
+        //   date;
+        // });
+        // const filtered = daysDate_Arr.filter((date, index) => {
+        //   !unique_daysDate_Arr.includes(date, index + 1);
+        // });
+
+        // console.log(filtered);
 
         ////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////
