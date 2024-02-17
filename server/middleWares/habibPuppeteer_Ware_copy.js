@@ -13,8 +13,8 @@ const get_Habib_Data = async (clinic) => {
 
   await puppeteer
     .launch({
-      // headless: true,
-      headless: false,
+      headless: true,
+      // headless: false,
       executablePath:
         // "C:/Program Files/Google/Chrome/Application/chrome.exe",
         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -115,7 +115,7 @@ const get_Habib_Data = async (clinic) => {
         //    current week from MongoDB.
 
         // for (let i = 28; i < 33; i++) {
-        for (let i = 13; i <= 18; i++) {
+        for (let i = 21; i <= 25; i++) {
           // 1)
           await days_Btns[i].click();
           await page.waitForSelector("b.ng-tns-c12-0");
